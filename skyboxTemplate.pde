@@ -9,9 +9,12 @@ PImage skyBoxBottom;
 PImage skyBoxTop;
 PImage skyBoxFront;
 
-String filePrefix = "vz_sinister_ocean_";
+String filePrefix = "vz_apocalypse_ocean_";
 
 int rotation = 0;
+
+PImage sphereTex;
+PShape globe;
 
 void setup(){
   cam = new QueasyCam(this);
@@ -22,9 +25,15 @@ void setup(){
   skyBoxLeft = loadImage(filePrefix+"left.png");
   skyBoxTop = loadImage(filePrefix+"up.png");
   skyBoxBottom = loadImage(filePrefix+"down.png");
+  sphereTex = loadImage("reflective-shiny-chrome-texture-free.jpg");
   textureMode(NORMAL);
+  noStroke();
+  globe = createShape(SPHERE, 10);
+  globe.setTexture(sphereTex);
+  
   fill(255);
   stroke(color(44,48,32));
+
 }
 
 void draw(){
@@ -42,6 +51,12 @@ void draw(){
   rotateY(radians(rotation));
   rotateZ(radians(rotation));
   box(20);
+  popMatrix();
+  
+  pushMatrix();
+  translate(100, 20, 50);
+  shape(globe);
+  println(mouseX);
   popMatrix();
   
   pushMatrix();
