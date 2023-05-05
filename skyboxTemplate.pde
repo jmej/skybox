@@ -9,7 +9,7 @@ PImage skyBoxBottom;
 PImage skyBoxTop;
 PImage skyBoxFront;
 
-String filePrefix = "vz_apocalypse_";
+String filePrefix = "vz_sinister_ocean_";
 
 int rotation = 0;
 
