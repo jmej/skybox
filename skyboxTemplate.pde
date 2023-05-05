@@ -1,6 +1,6 @@
-import peasy.PeasyCam;
+import queasycam.*;
 
-PeasyCam cam;
+QueasyCam cam;
 
 PImage skyBoxBack;
 PImage skyBoxLeft;
@@ -11,8 +11,10 @@ PImage skyBoxFront;
 
 String filePrefix = "vz_apocalypse_";
 
+int rotation = 0;
+
 void setup(){
-  cam = new PeasyCam(this, 400);
+  cam = new QueasyCam(this);
   size(2000, 2000, P3D);
   skyBoxFront = loadImage(filePrefix+"front.png");
   skyBoxBack = loadImage(filePrefix+"back.png");
@@ -27,10 +29,26 @@ void setup(){
 
 void draw(){
   background(0);
+  ambientLight(200, 200, 200);
+  directionalLight(200, 200, 200, -1, 1, -1);
+  rotation++;
+  rotation = rotation % 360;
   noStroke();
-  //translate(width/2.0, height/2.0, -100);
-  scale(9000);
+
+  pushMatrix();
+  translate(100, 0, 0);
+  fill(200,0,50);
+  rotateX(radians(rotation));
+  rotateY(radians(rotation));
+  rotateZ(radians(rotation));
+  box(20);
+  popMatrix();
+  
+  pushMatrix();
+  noLights();
+  scale(500);
   skyBox(skyBoxFront, skyBoxBack, skyBoxBottom, skyBoxRight, skyBoxLeft, skyBoxTop);
+  popMatrix();
   
 }
 
